@@ -1,0 +1,45 @@
+{% extends '../base/base.html' %}
+
+
+{% block content %}
+
+<div class="row">
+    <!-- left side -->
+    {% include './leftsidebar.html' %}
+
+    <!-- right side -->
+     <div class="col-md-9">
+        <h3 class="mt-2" style="font-size: 28px; color: #333; font-weight: 600; border-bottom: 2px solid #ff9800; padding-bottom: 10px; margin-bottom: 20px;">
+            All Categories
+        </h3>
+        <a href="{% url 'add_categories' %}" class="btn btn-dark text-light float-right mb-3">Add New Category</a>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Category Name</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+               {% for cat in categories %}
+              <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>{{ cat.category_name }}</td>
+                <td>{{ cat.created_at }}</td>
+                <td>{{ cat.updated_at }}</td>
+                <td>
+                    <a href="{% url 'edit_categories' cat.id %}"><i class="fa fa-edit text-success"></i> </a>&nbsp;&nbsp;
+                    <a href="{% url 'delete_categories' cat.id %}"><i class="fa fa-trash text-danger"></i></a>
+                </td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+          
+     </div>
+</div>
+
+{% endblock %}

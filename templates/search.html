@@ -1,0 +1,36 @@
+{% extends './base/base.html' %}
+
+{% block content %}
+
+<h3 style="
+font-size: 2rem; 
+color: #979685; /* Dark grey for better readability */
+padding: 15px 0; 
+border-bottom: 3px solid #ffcc00; /* Subtle golden bottom border */
+letter-spacing: 1px; 
+text-transform: uppercase;
+font-weight: bold; 
+text-align: center; /* Center align to balance the heading */
+">
+Seach Keywords:- {{ keyword }}
+</h3>
+<main role="main" class="container p-0">
+  <div class="row">
+    <div class="col-md-8 blog-main">
+      {% for blog in blogs %}
+      <div class="card border-0" >
+        <div class="card-body">
+          <h3> <a href="{% url 'blogs' blog.slug %}">{{ blog.title }}</a></h3>
+          <small class="mb-1 text-muted">{{ blog.created_at | timesince }} ago | {{ blog.author }}</small>
+          <p class="card-text">{{ blog.short_description | truncatewords:20 }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- /.blog-main -->
+
+  </div><!-- /.row -->
+
+</main><!-- /.container -->
+
+{% endblock %}
